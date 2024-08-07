@@ -2,7 +2,6 @@ from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_serializer import SerializerMixin
 from config import db, bcrypt
-import datetime
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -38,7 +37,7 @@ class Post(db.Model, SerializerMixin):
 
     @validates('content')
     def content_validation(self, key, content):
-        if len(content) < 1 or len(content) > 300:
+        if len(content) < 1:
             raise ValueError('Content must have less than 300 characters')
         else:
             return content
