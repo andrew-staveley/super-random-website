@@ -33,7 +33,7 @@ class Post(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, nullable = False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
 
     @validates('content')

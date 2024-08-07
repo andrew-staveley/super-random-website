@@ -70,7 +70,7 @@ class PostIndex(Resource):
         try:
             post = Post(
                 content=content,
-                timestamp=datetime.datetime.utcnow,
+                timestamp=datetime.datetime.now(),
                 user_id=session['user_id']
             )
             db.session.add(post)
@@ -85,3 +85,6 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(PostIndex, '/posts', endpoint='posts')
+
+if __name__=='__main__':
+    app.run(port=5555, debug=True)
