@@ -29,11 +29,11 @@ class Signup(Resource):
         
 class CheckSession(Resource):
     def get(self):
-        user_id = session['user_id']
-        if user_id:
-            user = User.query.filter(User.id == user_id).first()
-            if user:
-                return user.to_dict(), 200
+        user = session['user_id']
+        if user:
+            userobj = User.query.filter(User.id == user).first()
+            if userobj:
+                return userobj.to_dict(), 200
             return {'error': 'Invalid session.'}, 401
         return {'error': 'Session does not exist.'}, 401
     
@@ -79,12 +79,31 @@ class PostIndex(Resource):
         except ValueError:
             return {'error': '422 Unprocessable Entity'}, 422
         
+class Posts(Resource):
+    def get(self):
+        if session['user_id']:
+            posts = Post.query.all()
+            if posts:
+                return [post.to_dict() for post in posts], 200
+            return {'error': '401: Unauthorized'}
+    
+class RetrieveUser(Resource):
+    def get(self):
+        request_json = request.get_json()
+        user_id = request_json('user_id')
+        user = User.query.filter_by(User.id == user_id).first()
+        if user:
+            return user.to_dict(), 201
+        return {'error': '400: Bad Request'}, 400
+        
         
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
-api.add_resource(PostIndex, '/posts', endpoint='posts')
+api.add_resource(PostIndex, '/userpost', endpoint='userpost')
+api.add_resource(Posts, '/posts', endpoint='posts')
+api.add_resource(RetrieveUser, '/getuser', endpoint='getuser')
 
 if __name__=='__main__':
     app.run(port=5555, debug=True)
