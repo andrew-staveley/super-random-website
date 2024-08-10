@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
-import NavBar from "../components/NavBar.js"
+import { Link } from "react-router-dom"
 
 function Home() {
-
-    //Validates Login & Creates Session
-    const [session, setSession] = useState([])
-    useEffect(() => {
-        fetch("http://localhost:5555/check_session")
-        .then((r) => r.json())
-        .then((data) => setSession(data))
-    }, [])
-
     return (
         <>
             <header>
-                {<NavBar user={session}/>}
             </header>
             <main>
-                <h1>Welcome to the Super Random Webite</h1>
+                <h1>Welcome to Twitter 2.0</h1>
                 <h3>Very clearly a work in progress lol.</h3>
-                <h4>Welcome user {session}</h4>
+                <h4>Welcome Loser</h4>
+                <Link to={"/login"}>Enter Here</Link>
             </main>
         </>
     )
