@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp.js"
 import Feed from "./pages/Feed.js"
 import Post from "./pages/Post.js"
 import Profile from "./pages/Profile.js"
+import NewPost from "./pages/NewPost.js"
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: "/profile/:id",
         element: <Profile />,
         errorElement: <ErrorPage /> 
+    },
+    {
+        path: "/new",
+        element: <NewPost />,
+        errorElement: <ErrorPage />,
     }
     ];
 export default routes;
