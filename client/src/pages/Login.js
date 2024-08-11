@@ -66,7 +66,7 @@ function Login() {
                         <h4>{err}</h4>
                     ))}
                 <h3>Don't have an account?</h3>
-                <h3>{<Link to="/signup">Sign Up Here</Link>}</h3>
+                <h3>{<Link to="/signup">Start Here</Link>}</h3>
             </main>
         </>
     )
