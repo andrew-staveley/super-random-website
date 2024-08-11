@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import "../styles/TheStyleFile.css"
 
 function Login() {
     const [username, setUsername] = useState("")
@@ -22,16 +23,13 @@ function Login() {
 
     //Sets Username and Passwords
     function usernameHandler(e) {
+        e.preventDefault()
         setUsername(e.target.value)
     }
 
     function passwordHandler(e) {
+        e.preventDefault()
         setPassword(e.target.value)
-    }
-
-    //Redirects after a successful login
-    function handleLogin() {
-        nav("/feed")
     }
 
     function handleSubmit(e) {
@@ -44,7 +42,7 @@ function Login() {
             body: JSON.stringify({ username, password }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then(() => handleLogin())
+                r.json().then(() => nav("/feed"))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
@@ -60,13 +58,13 @@ function Login() {
                     <form onSubmit={handleSubmit}>
                         <label>Username <input type="text" name="username" onChange={usernameHandler}/></label>
                         <label>Password <input type="text" name="password" onChange={passwordHandler}/></label>
-                        <button type="submit">Log In</button>
+                        <button type="submit" class="button">Log In</button>
                     </form>
                     {errors.map((err) => (
                         <h4>{err}</h4>
                     ))}
                 <h3>Don't have an account?</h3>
-                <h3>{<Link to="/signup">Start Here</Link>}</h3>
+                <button class="button">{<Link to="/signup">Start Here</Link>}</button>
             </main>
         </>
     )
