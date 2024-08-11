@@ -8,7 +8,7 @@ function Home() {
             <main>
                 <h1>Welcome to Twitter 2.0</h1>
                 <h3>Very clearly a work in progress lol.</h3>
-                <h4>Welcome Loser</h4>
+                <h4>Welcome to the party Loser</h4>
                 <Link to={"/login"}>Enter Here</Link>
             </main>
         </>
