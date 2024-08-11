@@ -17,7 +17,7 @@ function Account() {
         })
     }, []);
 
-    if (!session) nav('/feed');
+    if (!session) nav('/');
 
     useEffect(() => {
         fetch("/userpost").then((r) => {
@@ -30,10 +30,12 @@ function Account() {
     return (
         <>
             <header>
-                <NavBar />
+                <NavBar session={session}/>
             </header>
             <main>
                 <h1>Welcome to your account dashboard, {session.username}.</h1>
+                <h2>Name: {session.name}</h2>
+                <h3>Bio: {session.bio}</h3>
                 <h4>Posts you've created</h4>
                 {posts.map((post) => <PostItem key={post.id} post={post} />)}
             </main>

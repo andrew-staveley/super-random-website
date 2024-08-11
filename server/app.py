@@ -29,13 +29,13 @@ class Signup(Resource):
         
 class CheckSession(Resource):
     def get(self):
-        user = session['user_id']
-        if user:
-            userobj = User.query.filter(User.id == user).first()
+        if session['user_id']:
+            userobj = User.query.filter(User.id == session['user_id']).first()
             if userobj:
                 return userobj.to_dict(), 200
             return {'error': 'Invalid session.'}, 401
-        return {'error': 'Session does not exist.'}, 401
+        else:
+            return {'error': 'Session does not exist.'}, 401
     
 class Login(Resource):
     def post(self):
@@ -81,11 +81,10 @@ class PostIndex(Resource):
         
 class Posts(Resource):
     def get(self):
-        if session['user_id']:
-            posts = Post.query.all()
-            if posts:
-                return [post.to_dict() for post in posts], 200
-            return {'error': '401: Unauthorized'}
+        posts = Post.query.all()
+        if posts:
+            return [post.to_dict() for post in posts], 200
+        return {'error': '401: Unauthorized'}
     
 class RetrieveUser(Resource):
     def get(self):
