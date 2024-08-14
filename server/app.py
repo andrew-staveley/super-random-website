@@ -25,17 +25,18 @@ class Signup(Resource):
             session['user_id'] = user.id
             return user.to_dict(), 201
         except IntegrityError:
-            return {'error': '422 Unprocessable Entity'}, 422
+            return {'error': 'Username is taken.'}, 422
         
 class CheckSession(Resource):
     def get(self):
-        if session['user_id']:
-            userobj = User.query.filter(User.id == session['user_id']).first()
-            if userobj:
-                return userobj.to_dict(), 200
-            return {'error': 'Invalid session.'}, 401
+        if 'user_id' in session:
+            user = User.query.filter(User.id == session.get('user_id')).first()
         else:
-            return {'error': 'Session does not exist.'}, 401
+            return {"message": "401: Not Authorized"}, 401
+        if user:
+            return user.to_dict(), 201
+        else:
+            return {"message": "401: Not Authorized"}, 401
     
 class Login(Resource):
     def post(self):
@@ -77,7 +78,7 @@ class PostIndex(Resource):
             db.session.commit()
             return post.to_dict(), 201
         except ValueError:
-            return {'error': '422 Unprocessable Entity'}, 422
+            return {'error': 'There was a problem uploading.'}, 422
         
 class Posts(Resource):
     def get(self):
