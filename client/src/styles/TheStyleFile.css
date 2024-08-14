@@ -1,7 +1,8 @@
 /* Global Elements */
-
 * {
-    font-family: Monaco, sans-serf;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: black;
 }
 
 /* Special Elements */
@@ -34,6 +35,7 @@
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
+  margin: 10px;
 }
 
 .button:focus {
@@ -48,4 +50,62 @@
 .button-:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+#loginForm, #signupForm, #newPostBox {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50%;
+  border: 3px solid black;
+  padding: 10px;
+}
+
+header {
+  background-color: lightblue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.postItem {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  margin: 3px
+}
+
+.navBar, .navBarMimic {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  min-height: 10%;
+}
+
+#logInButton {
+  display: block;
+  margin: auto;
+}
+
+#loginUsername, #loginPassword, #signupUsername, #signupPassword, #signupConfirmation, #signupName, #signupBio {
+  margin: auto;
+  margin-bottom: 15px;
+  width: 200px;
+  height: 30px;
+  font-size: large;
+}
+
+#loginButton, #signupButton {
+  margin: auto;
+}
+
+#newPostBox {
+  min-width: 50%;
+  min-height: 300px;
+  justify-content: center;
+}
+
+#homePage {
+  /*background-image: url("../../public/homepage.jpg");*/
 }
