@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom"
 function ErrorPage() {
+    const navigate = useNavigate()
+
+    function redirect() {
+        return navigate("/feed")
+    }
+    
     return (
-        <h1>ERROR LOL</h1>
+        <main>
+            <h1>There was an error processing your request</h1>
+            <button className="button" onClick={redirect}>Return Home</button>
+        </main>
     )
 }
 

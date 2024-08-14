@@ -4,8 +4,7 @@ import NavBar from "../components/NavBar.js"
 import PostItem from "../components/PostItem.js"
 
 function Account() {
-    const nav = useNavigate()
-    //Validates Session Data for Auto Login
+    const navigate = useNavigate()
     const [session, setSession] = useState([])
     const [posts, setPosts] = useState([])
 
@@ -13,11 +12,11 @@ function Account() {
         fetch("/check_session").then((r) => {
         if (r.ok) {
             r.json().then((user) => setSession(user));
+                } else{
+                    navigate("/")
                 }
         })
     }, []);
-
-    if (!session) nav('/');
 
     useEffect(() => {
         fetch("/userpost").then((r) => {

@@ -5,21 +5,19 @@ import PostItem from "../components/PostItem.js"
 
 
 function Feed() {
-    const [session, setSession] = useState([])
+    const [session, setSession] = useState([ null])
     const [posts, setPosts] = useState([])
-    const nav = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch("/check_session").then((r) => {
           if (r.ok) {
             r.json().then((user) => setSession(user));
+                } else {
+                    navigate('/login')
                 }
             })
         }, [])
-
-    if (!session) {
-        nav('/')
-    }
 
     useEffect(() => {
         fetch('/posts').then((r) => {
@@ -31,9 +29,11 @@ function Feed() {
 
     return (
         <>
-            <NavBar session={session}/>
+            <header>
+                <NavBar session={session}/>
+            </header>
             <main>
-                {posts.map((post) => <PostItem key={post.id} post={post}/>)}
+                {posts.map((post) => <PostItem key={post.id} post={post} />)}
             </main>
         </>
     )
