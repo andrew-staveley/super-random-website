@@ -2,14 +2,12 @@
 function PostItem({ post }) {
     return (
         <>
-            <main>
-                <div>
-                    <h2>{post.user.username}</h2>
-                    <h3>{post.user.name}</h3>
-                    <h3>{post.content}</h3>
-                    <h4>{post.timestamp}</h4>
-                </div>
-            </main>
+            <div className='postItem'>
+                <h2 className='postItemUsername'>{post.user.username}</h2>
+                <h3 className='postItemName'>{post.user.name}</h3>
+                <h3 className='postItemContent'>{post.content}</h3>
+                <h4 className='postItemTimeStamp'>{post.timestamp}</h4>
+            </div>
         </>
     )
 }
